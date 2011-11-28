@@ -11,13 +11,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    ui/MainWindow.cpp
+    ui/MainWindow.cpp \
+    ui/TableWindow.cpp
 
 HEADERS  += MainWindow.h \
-    ui/MainWindow.h
+    ui/MainWindow.h \
+    ui/TableWindow.h
 
 FORMS    += MainWindow.ui \
-    ui/MainWindow.ui
+    ui/MainWindow.ui \
+    ui/TableWindow.ui
+
+
+
 
 
 
