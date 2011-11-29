@@ -3,20 +3,31 @@
 
 #include <QDialog>
 
+#include <QtSql>
+
 namespace Ui {
-    class TableWindow;
+	class TableWindow;
 }
 
 class TableWindow : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit TableWindow(QWidget *parent = 0);
-    ~TableWindow();
+	explicit TableWindow(QString table, QSqlDatabase *db, QWidget *parent = 0);
+
+	void view();
+
+	QString table() const { return mTable;}
+
+	~TableWindow();
 
 private:
-    Ui::TableWindow *ui;
+	Ui::TableWindow *ui;
+
+	QSqlTableModel  model;
+
+	QString	mTable;
 };
 
 #endif // TABLEWINDOW_H
