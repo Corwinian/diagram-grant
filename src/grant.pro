@@ -14,15 +14,15 @@ QMAKE_CXXFLAGS += -std=c++0x
 SOURCES += main.cpp \
 	ui/MainWindow.cpp \
 	ui/TableWindow.cpp \
-    CardWiew.cpp
+	ui/CardWiew.cpp
 
 HEADERS  += ui/MainWindow.h \
 	ui/TableWindow.h \
-    CardWiew.h
+	ui/CardWiew.h
 
 FORMS    += ui/MainWindow.ui \
 	ui/TableWindow.ui \
-    CardWiew.ui
+	ui/CardWiew.ui
 
 
 
