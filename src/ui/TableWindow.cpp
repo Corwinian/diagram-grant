@@ -49,3 +49,20 @@ void TableWindow::on_btnDelRow_clicked()
 	model.removeRow(selectRow);
 	model.submitAll();
 }
+
+void TableWindow::on_btnOk_clicked()
+{
+	if(model.submitAll())
+	{
+		model.database().commit();
+	}
+	else
+	{
+		model.database().rollback();
+	}
+}
+
+void TableWindow::on_btnCansel_clicked()
+{
+	model.database().rollback();
+}

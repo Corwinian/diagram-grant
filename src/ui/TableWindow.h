@@ -35,6 +35,10 @@ private slots:
 
 	void on_btnDelRow_clicked();
 
+	void on_btnOk_clicked();
+
+	void on_btnCansel_clicked();
+
 private:
 	Ui::TableWindow *ui;
 
