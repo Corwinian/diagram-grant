@@ -4,23 +4,28 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 TARGET = grant
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp \
-    ui/MainWindow.cpp \
-    ui/TableWindow.cpp
+	ui/MainWindow.cpp \
+	ui/TableWindow.cpp \
+    CardWiew.cpp
 
-HEADERS  += MainWindow.h \
-    ui/MainWindow.h \
-    ui/TableWindow.h
+HEADERS  += ui/MainWindow.h \
+	ui/TableWindow.h \
+    CardWiew.h
 
-FORMS    += MainWindow.ui \
-    ui/MainWindow.ui \
-    ui/TableWindow.ui
+FORMS    += ui/MainWindow.ui \
+	ui/TableWindow.ui \
+    CardWiew.ui
+
+
+
 
 
 
