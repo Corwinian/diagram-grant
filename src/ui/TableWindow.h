@@ -22,12 +22,28 @@ public:
 
 	~TableWindow();
 
+private slots:
+	void on_btnStartt_clicked() {selectItem(0); }
+
+	void on_btnEnd_clicked() {selectItem(model.query().size()-1); }
+
+	void on_btnPrev_clicked() {selectItem(selectRow - 1);}
+
+	void on_btnNext_clicked() {selectItem(selectRow + 1);}
+
+	void on_tableView_clicked(const QModelIndex &index);
+
 private:
 	Ui::TableWindow *ui;
 
 	QSqlTableModel  model;
+	//QItemSelectionModel selection;
+
+	int selectRow;
 
 	QString	mTable;
+
+	void selectItem(int row);
 };
 
 #endif // TABLEWINDOW_H
