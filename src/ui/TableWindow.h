@@ -33,6 +33,8 @@ private slots:
 
 	void on_tableView_clicked(const QModelIndex &index);
 
+	void on_btnDelRow_clicked();
+
 private:
 	Ui::TableWindow *ui;
 

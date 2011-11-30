@@ -43,3 +43,9 @@ void TableWindow::on_tableView_clicked(const QModelIndex &index)
 {
   selectItem(index.row());
 }
+
+void TableWindow::on_btnDelRow_clicked()
+{
+	model.removeRow(selectRow);
+	model.submitAll();
+}
