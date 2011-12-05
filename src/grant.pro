@@ -11,13 +11,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    ui/MainWindow.cpp
+    ui/MainWindow.cpp \
+    core/db_struct.cpp
 
 HEADERS  += MainWindow.h \
-    ui/MainWindow.h
+    ui/MainWindow.h \
+    core/db_struct.h
 
 FORMS    += MainWindow.ui \
     ui/MainWindow.ui
+
+
 
 
 
