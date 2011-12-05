@@ -62,7 +62,8 @@ private:
 	QString mCaption;
 
 	TColumns mColums;
-
 };
+
+typedef QMap<QString, Table> TTableList;
 
 #endif // DB_STRUCT_H
