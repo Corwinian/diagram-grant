@@ -54,7 +54,7 @@ public:
 public:
 	typedef QMap<QString, Column>  TColumns;
 
-	Table(QString name, QString mCaption, TColumns colums);
+	Table(QString name="", QString mCaption="", TColumns colums=TColumns());
 
 	QString name() const { return  mName;}
 	QString caption() const { return  mCaption;}
