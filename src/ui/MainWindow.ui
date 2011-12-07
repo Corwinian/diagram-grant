@@ -28,6 +28,12 @@
      <string>Таблицы</string>
     </property>
    </widget>
+   <widget class="QMenu" name="mMain">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+   </widget>
+   <addaction name="mMain"/>
    <addaction name="mTables"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -39,8 +45,22 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionDbConenct">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Подключиться</string>
+   </property>
+   <property name="toolTip">
+    <string>Подключиться к базе данных</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
+ <slots>
+  <slot>connect()</slot>
+ </slots>
 </ui>

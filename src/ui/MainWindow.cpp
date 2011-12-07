@@ -254,32 +254,55 @@ CREATE  TABLE `TaskList` (
 
 	return Table  ("Company", "Company", colums);
 }
+
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
 {
 
-	mTables.insert("Company",getCompany());
-	mTables.insert("Developers",getDeveloper());
-
 	ui->setupUi(this);
 
+	ui->mMain->addAction(ui->actionDbConenct);
+
+	mTables.insert("Company",getCompany());
+	mTables.insert("Developers",getDeveloper());
 	for(auto table : mTables)
 	{
 		QAction *action = ui->mTables->addAction(table.caption());
 
 		action->setProperty("table", table.name());
-		connect(action, SIGNAL(triggered()) ,SLOT(on_mTablesTriggered()));
+		connect(action, SIGNAL(triggered()) ,SLOT(mTablesTriggered()));
 
 	}
 }
 
+
 MainWindow::~MainWindow()
 {
+	db.close();
 	delete ui;
 }
 
-void MainWindow::on_mTablesTriggered()
+void MainWindow::mTablesTriggered()
 {
 	qDebug() << sender()->property("table");
+
 }
+
+void MainWindow::on_actionDbConenct_triggered()
+{
+	db = QSqlDatabase::addDatabase("QMYSQL", "db");
+	db.setHostName("localhost");
+	db.setDatabaseName("db");
+	db.setUserName("root");
+	db.setPassword("");
+
+	if(!db.open())
+	{
+		qDebug() << "не удалось подлючиться к базе данных" << db.lastError();
+		throw 1;
+	}
+}
+
+
