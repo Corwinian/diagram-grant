@@ -10,7 +10,8 @@ Table::Table::Column::Column(QString name, QString caption, TColumnType type)
 
 
 
-Table::Table(QString name, QString mCaption, TColumns colums)
+Table::Table(QString name, QString caption, TColumns colums)
+	:mName(name), mCaption(caption),  mColums (colums)
 {
 
 }
