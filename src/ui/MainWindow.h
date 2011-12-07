@@ -17,6 +17,9 @@ public:
 	~MainWindow();
 	const TTableList tables() const { return mTables;}
 
+private slots:
+	void on_mTablesTriggered();
+
 private:
 	Ui::MainWindow *ui;
 	TTableList mTables;

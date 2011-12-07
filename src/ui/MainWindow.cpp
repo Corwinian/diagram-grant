@@ -3,6 +3,7 @@
 
 #include <map>
 
+#include <qdebug.h>
 
 const Table getCompany()
 {
@@ -53,7 +54,7 @@ const Table getProjecty()
   )
 */
 
-		return Table ("Company", "Company", colums);
+		return Table ("Developers", "Developers", colums);
 }
 
 
@@ -76,7 +77,8 @@ const Table getDeveloper()
 		colums.insert(QString("name"), name);
 		colums.insert(QString("name"), name);
 
-		return Table  ("Company", "Company", colums);
+		return Table ("Developers", "Developers", colums);
+
 }
 
 const Table getContact()
@@ -260,11 +262,24 @@ MainWindow::MainWindow(QWidget *parent) :
 	mTables.insert("Company",getCompany());
 	mTables.insert("Developers",getDeveloper());
 
-
 	ui->setupUi(this);
+
+	for(auto table : mTables)
+	{
+		QAction *action = ui->mTables->addAction(table.caption());
+
+		action->setProperty("table", table.name());
+		connect(action, SIGNAL(triggered()) ,SLOT(on_mTablesTriggered()));
+
+	}
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
+}
+
+void MainWindow::on_mTablesTriggered()
+{
+		qDebug() << sender()->property("table");
 }
