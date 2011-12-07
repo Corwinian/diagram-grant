@@ -1,9 +1,9 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-#include <map>
-
 #include <qdebug.h>
+
+#include  "TableWindow.h"
 
 const Table getCompany()
 {
@@ -281,5 +281,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_mTablesTriggered()
 {
-		qDebug() << sender()->property("table");
+	qDebug() << sender()->property("table");
 }
