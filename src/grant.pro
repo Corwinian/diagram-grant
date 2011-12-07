@@ -14,17 +14,17 @@ QMAKE_CXXFLAGS += -std=c++0x
 SOURCES += main.cpp \
 	ui/MainWindow.cpp \
 	ui/TableWindow.cpp \
-	ui/CardWiew.cpp
+	ui/CardWiew.cpp \
+	core/db_struct.cpp
 
 HEADERS  += ui/MainWindow.h \
 	ui/TableWindow.h \
-	ui/CardWiew.h
+	ui/CardWiew.h \
+ 	core/db_struct.h
 
 FORMS    += ui/MainWindow.ui \
 	ui/TableWindow.ui \
 	ui/CardWiew.ui
-
-
 
 
 
