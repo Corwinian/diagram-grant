@@ -286,8 +286,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::mTablesTriggered()
 {
-	qDebug() << sender()->property("table");
-
+	TableWindow *window = new TableWindow(mTables[sender()->property("table").toString()], &db, this);
+	window->show();
 }
 
 void MainWindow::on_actionDbConenct_triggered()
