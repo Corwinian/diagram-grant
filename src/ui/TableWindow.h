@@ -5,6 +5,8 @@
 
 #include <QtSql>
 
+#include "core/db_struct.h"
+
 namespace Ui {
 	class TableWindow;
 }
@@ -14,11 +16,11 @@ class TableWindow : public QDialog
 	Q_OBJECT
 
 public:
-	explicit TableWindow(QString table, QSqlDatabase *db, QWidget *parent = 0);
+	explicit TableWindow(Table table, QSqlDatabase *db, QWidget *parent = 0);
 
 	void view();
 
-	QString table() const { return mTable;}
+	Table table() const { return mTable;}
 
 	~TableWindow();
 
@@ -47,7 +49,7 @@ private:
 
 	int selectRow;
 
-	QString	mTable;
+	Table mTable;
 
 	void selectItem(int row);
 };
