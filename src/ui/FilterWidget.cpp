@@ -24,12 +24,17 @@ FilterWidget::~FilterWidget()
 void FilterWidget::on_cbColumns_currentIndexChanged(int index)
 {
 	mFilParam.column = ui->cbColumns->itemData(index).toString();
-
 	emit updateFilter();
 }
 
 void FilterWidget::on_coOp_currentIndexChanged(int index)
 {
-	mFilParam.op = ui->cbColumns->itemData(index).toString();
+	mFilParam.op = ui->cbOp->itemData(index).toString();
+	emit updateFilter();
+}
+
+void FilterWidget::on_lineEdit_lostFocus()
+{
+	mFilParam.param = ui->lineEdit->text();
 	emit updateFilter();
 }

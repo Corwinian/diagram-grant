@@ -32,6 +32,8 @@ private slots:
 	void on_cbColumns_currentIndexChanged(int index);
 	void on_coOp_currentIndexChanged(int index);
 
+	void on_lineEdit_lostFocus();
+
 private:
 
 	Table::TColumns mColumns;
