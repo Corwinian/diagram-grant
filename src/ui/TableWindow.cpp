@@ -1,6 +1,8 @@
 #include "TableWindow.h"
 #include "ui_TableWindow.h"
 
+#include "FilterWidget.h"
+
 TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 	QDialog(parent),
 	mTable(table),
@@ -11,8 +13,11 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	ui->FilterLayout->addWidget(new FilterWidget(table.colums(), this));
+
 	qDebug()<<model.database().isOpen();
 	model.setTable(mTable.name());
+
 
 
 	model.select();
