@@ -13,12 +13,10 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	ui->FilterLayout->addWidget(new FilterWidget(table.colums(), this));
+	on_btnAddFiltr_clicked();
 
 	qDebug()<<model.database().isOpen();
 	model.setTable(mTable.name());
-
-
 
 	model.select();
 
@@ -70,4 +68,11 @@ void TableWindow::on_btnOk_clicked()
 void TableWindow::on_btnCansel_clicked()
 {
 	model.database().rollback();
+}
+
+
+
+void TableWindow::on_btnAddFiltr_clicked()
+{
+	ui->FilterLayout->insertWidget(ui->FilterLayout->count()-1, new FilterWidget(table().colums(), this));
 }

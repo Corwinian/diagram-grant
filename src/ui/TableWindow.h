@@ -41,6 +41,8 @@ private slots:
 
 	void on_btnCansel_clicked();
 
+	void on_btnAddFiltr_clicked();
+
 private:
 	Ui::TableWindow *ui;
 
