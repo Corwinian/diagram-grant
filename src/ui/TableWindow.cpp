@@ -74,5 +74,17 @@ void TableWindow::on_btnCansel_clicked()
 
 void TableWindow::on_btnAddFiltr_clicked()
 {
-	ui->FilterLayout->insertWidget(ui->FilterLayout->count()-1, new FilterWidget(table().colums(), this));
+	FilterWidget *it = new FilterWidget(table().colums(), this);
+	ui->FilterLayout->insertWidget(ui->FilterLayout->count()-1, it);
+	connect(it, SIGNAL(updateFilter()), SLOT(startFilter()));
+}
+
+void TableWindow::startFilter()
+{
+	FilterWidget::FilteringParams param
+			= static_cast<FilterWidget *> (ui->FilterLayout->itemAt(0)->widget())->getParams();
+
+	model.setFilter(QString("%1 %2 %3").arg(param.column).arg(param.op).arg(param.param));
+	model.select();
+	ui->tableView->show();
 }
