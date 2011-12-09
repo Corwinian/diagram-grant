@@ -24,6 +24,7 @@ public:
 		enum TColumnType
 		{
 			TCOLUMN_TYPE_INT,
+			TCOLUMN_TYPE_BOOL,
 			TCOLUMN_TYPE_DATE,
 			TCOLUMN_TYPE_STRING,
 		};

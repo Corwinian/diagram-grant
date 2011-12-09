@@ -60,24 +60,25 @@ const Table getProjecty()
 
 const Table getDeveloper()
 {
-		auto id = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT);
+		auto login = Table::Column("login","login", Table::Column::TCOLUMN_TYPE_STRING);
+		auto pass = Table::Column("pass","pass", Table::Column::TCOLUMN_TYPE_STRING);
 		auto name = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
-		auto dateStart = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT);
-		auto supposeDateFinish = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
 
-		auto dateFinish = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT);
-		auto description = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
+		auto isAdmin = Table::Column("isAdmin" ,"isAdmin", Table::Column::TCOLUMN_TYPE_BOOL);
+		auto company = Table::Column("company","company",
+						Table::Column::TCOLUMN_TYPE_INT,
+						Table::Column::ForeingLink("company", id));
+
 
 		Table::TColumns colums;
 
-		colums.insert(QString("Id"), id);
+		colums.insert(QString("login"), login);
+		colums.insert(QString("pass"), pass);
 		colums.insert(QString("name"), name);
-		colums.insert(QString("name"), name);
-		colums.insert(QString("name"), name);
-		colums.insert(QString("name"), name);
-		colums.insert(QString("name"), name);
+		colums.insert(QString("isAdmin"), isAdmin);
+		colums.insert(QString("company"), company);
 
-		return Table ("Developers", "Developers", colums);
+		return Table ("Developer", "Developer", colums);
 
 }
 
@@ -266,7 +267,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->mMain->addAction(ui->actionDbConenct);
 
 	mTables.insert("Company",getCompany());
-	mTables.insert("Developers",getDeveloper());
+	mTables.insert("Developer",getDeveloper());
 	for(auto table : mTables)
 	{
 		QAction *action = ui->mTables->addAction(table.caption());
