@@ -8,6 +8,11 @@ Table::Table::Column::Column(QString name, QString caption, TColumnType type)
 
 }
 
+Table::Column::Column(QString name, QString caption, TColumnType type, ForeingLink link)
+	:mName(name), mCaption(caption), mColumnType(type), mLink(link)
+{
+
+}
 
 
 Table::Table(QString name, QString caption, TColumns colums)
