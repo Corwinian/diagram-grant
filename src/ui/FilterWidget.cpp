@@ -14,6 +14,9 @@ FilterWidget::FilterWidget(Table::TColumns columns, QWidget *parent) :
 	{
 		ui->cbColumns->addItem(column.caption(), column.name());
 	}
+
+	mFilParam.column = ui->cbColumns->itemData(0).toString();
+	mFilParam.op = ui->cbOp->itemText(0);
 }
 
 FilterWidget::~FilterWidget()
@@ -29,7 +32,7 @@ void FilterWidget::on_cbColumns_currentIndexChanged(int index)
 
 void FilterWidget::on_coOp_currentIndexChanged(int index)
 {
-	mFilParam.op = ui->cbOp->itemData(index).toString();
+	mFilParam.op = ui->cbOp->itemText(index);
 	emit updateFilter();
 }
 
@@ -37,4 +40,9 @@ void FilterWidget::on_lineEdit_lostFocus()
 {
 	mFilParam.param = ui->lineEdit->text();
 	emit updateFilter();
+}
+
+void FilterWidget::on_lineEdit_editingFinished()
+{
+	on_lineEdit_lostFocus();
 }

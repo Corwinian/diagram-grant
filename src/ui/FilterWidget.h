@@ -34,6 +34,8 @@ private slots:
 
 	void on_lineEdit_lostFocus();
 
+	void on_lineEdit_editingFinished();
+
 private:
 
 	Table::TColumns mColumns;
