@@ -31,7 +31,33 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="cbOp"/>
+    <widget class="QComboBox" name="cbOp">
+     <item>
+      <property name="text">
+       <string>&lt;=</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>&lt;</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>=</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>&gt;=</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>&gt;</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item>
     <widget class="QLineEdit" name="lineEdit"/>
