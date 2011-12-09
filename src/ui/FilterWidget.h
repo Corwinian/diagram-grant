@@ -2,9 +2,9 @@
 #define FILTERWIDGET_H
 
 #include <QFrame>
-
 #include "core/db_struct.h"
 
+#include "ui_FilterWidget.h"
 namespace Ui {
 	class FilterWidget;
 }
@@ -23,10 +23,15 @@ public:
 	explicit FilterWidget(Table::TColumns columns, QWidget *parent = 0);
 	~FilterWidget();
 
-	FilteringParams getParams() const {return mFilParam;}
+	FilteringParams getParams() const { return mFilParam;}
+
+	bool isActive() const { return ui->checkBox->isChecked();}
 
 signals:
 	void updateFilter();
+
+public slots:
+	void on_checkBox_clicked(bool checked);
 
 private slots:
 	void on_cbColumns_currentIndexChanged(int index);
@@ -35,6 +40,7 @@ private slots:
 	void on_lineEdit_lostFocus();
 
 	void on_lineEdit_editingFinished();
+
 
 private:
 
