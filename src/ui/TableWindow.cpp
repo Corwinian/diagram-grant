@@ -82,10 +82,14 @@ void TableWindow::on_btnAddFiltr_clicked()
 
 void TableWindow::startFilter()
 {
-	FilterWidget::FilteringParams param
-			= static_cast<FilterWidget *> (ui->FilterLayout->itemAt(0)->widget())->getParams();
+	FilterWidget *filterWidget =  static_cast<FilterWidget *> (ui->FilterLayout->itemAt(0)->widget());
+	FilterWidget::FilteringParams param	= filterWidget->getParams();
 
-	model.setFilter(QString("%1 %2 %3").arg(param.column).arg(param.op).arg(param.param));
+
+	QString filter = filterWidget->isActive() ? QString("%1 %2 %3").arg(param.column).arg(param.op).arg(param.param)
+						: QString("");
+
+	model.setFilter(filter);
 	model.select();
 	ui->tableView->show();
 }
