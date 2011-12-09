@@ -3,6 +3,8 @@
 
 #include "FilterWidget.h"
 
+
+
 TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 	QDialog(parent),
 	mTable(table),
@@ -16,12 +18,16 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 	on_btnAddFiltr_clicked();
 
 	qDebug()<<model.database().isOpen();
-	model.setTable(mTable.name());
 
 	static_cast<FilterWidget *>(ui->FilterLayout->itemAt(0)->widget())->on_checkBox_clicked(false);
+
+	model.setTable(mTable.name());
+	model->setRelation(4, QSqlRelation("Company", "id", "name"));
+
 	model.select();
 
 	ui->tableView->setModel(&model);
+	ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
 	ui->tableView->show();
 }
 

@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include <QtSql>
+#include <QSqlRelation>
 
 #include "core/db_struct.h"
 
@@ -48,7 +49,7 @@ private slots:
 private:
 	Ui::TableWindow *ui;
 
-	QSqlTableModel  model;
+	QSqlRelationalTableModel model;
 	//QItemSelectionModel selection;
 
 	int selectRow;
