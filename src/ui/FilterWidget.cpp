@@ -46,3 +46,11 @@ void FilterWidget::on_lineEdit_editingFinished()
 {
 	on_lineEdit_lostFocus();
 }
+
+void FilterWidget::on_checkBox_clicked(bool checked)
+{
+	ui->cbColumns->setEnabled(checked);
+	ui->cbOp->setEnabled(checked);
+	ui->lineEdit->setEnabled(checked);
+	emit updateFilter();
+}
