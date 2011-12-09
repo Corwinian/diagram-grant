@@ -18,6 +18,7 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 	qDebug()<<model.database().isOpen();
 	model.setTable(mTable.name());
 
+	static_cast<FilterWidget *>(ui->FilterLayout->itemAt(0)->widget())->on_checkBox_clicked(false);
 	model.select();
 
 	ui->tableView->setModel(&model);
