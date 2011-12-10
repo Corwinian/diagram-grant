@@ -34,7 +34,7 @@ void FilterWidget::on_cbColumns_currentIndexChanged(int index)
 
 	ui->cbValues->clear();
 
-	if (mColumns.find(mFilParam.column)->isForeingKey())
+	if (mColumns.find(mFilParam.column)->isForeingKey() && mFilParam.column != QString("id"))
 	{
 
 		for(auto value : static_cast<TableWindow *>(this->parent())->getLinkValues(mFilParam.column))
