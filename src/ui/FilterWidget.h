@@ -36,12 +36,7 @@ public slots:
 private slots:
 	void on_cbColumns_currentIndexChanged(int index);
 	void on_cbOp_currentIndexChanged(int index);
-
-	void on_lineEdit_lostFocus();
-
-	void on_lineEdit_editingFinished();
-
-
+	void on_lineEdit_textEdited(const QString &arg1);
 	void on_cbValues_currentIndexChanged(int index);
 
 private:

@@ -32,10 +32,9 @@ void FilterWidget::on_cbColumns_currentIndexChanged(int index)
 {
 	mFilParam.column = ui->cbColumns->itemData(index).toString();
 
-	ui->cbValues->clear();
-
 	if (mColumns.find(mFilParam.column)->isForeingKey() && mFilParam.column != QString("id"))
 	{
+		ui->cbValues->clear();
 
 		for(auto value : static_cast<TableWindow *>(this->parent())->getLinkValues(mFilParam.column))
 		{
@@ -64,7 +63,7 @@ void FilterWidget::on_cbOp_currentIndexChanged(int index)
 	emit updateFilter();
 }
 
-void FilterWidget::on_lineEdit_lostFocus()
+void FilterWidget::on_lineEdit_textEdited(const QString &arg1)
 {
 	mFilParam.param = ui->lineEdit->text();
 	emit updateFilter();
@@ -76,11 +75,6 @@ void FilterWidget::on_cbValues_currentIndexChanged(int index)
 	emit updateFilter();
 }
 
-void FilterWidget::on_lineEdit_editingFinished()
-{
-	on_lineEdit_lostFocus();
-}
-
 void FilterWidget::on_checkBox_clicked(bool checked)
 {
 	ui->cbColumns->setEnabled(checked);
@@ -89,3 +83,5 @@ void FilterWidget::on_checkBox_clicked(bool checked)
 	ui->lineEdit->setEnabled(checked);
 	emit updateFilter();
 }
+
+
