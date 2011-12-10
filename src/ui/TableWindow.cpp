@@ -22,7 +22,12 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 	static_cast<FilterWidget *>(ui->FilterLayout->itemAt(0)->widget())->on_checkBox_clicked(false);
 
 	model.setTable(mTable.name());
-	model->setRelation(4, QSqlRelation("Company", "id", "name"));
+
+	for (auto column : table.colums())
+	{
+		if(column.isForeingKey())
+			model.setRelation(column.index(), column.link());
+	}
 
 	model.select();
 
