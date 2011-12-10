@@ -30,7 +30,7 @@ void FilterWidget::on_cbColumns_currentIndexChanged(int index)
 	emit updateFilter();
 }
 
-void FilterWidget::on_coOp_currentIndexChanged(int index)
+void FilterWidget::on_cbOp_currentIndexChanged(int index)
 {
 	mFilParam.op = ui->cbOp->itemText(index);
 	emit updateFilter();
