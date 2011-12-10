@@ -42,6 +42,8 @@ private slots:
 	void on_lineEdit_editingFinished();
 
 
+	void on_cbValues_currentIndexChanged(int index);
+
 private:
 
 	Table::TColumns mColumns;
