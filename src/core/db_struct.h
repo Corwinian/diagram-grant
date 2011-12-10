@@ -15,6 +15,7 @@ public:
 	public:
 		enum TColumnType
 		{
+			TCOLUMN_TYPE_NONE,
 			TCOLUMN_TYPE_INT,
 			TCOLUMN_TYPE_BOOL,
 			TCOLUMN_TYPE_DATE,
@@ -24,7 +25,8 @@ public:
 	public:
 		Column(QString name, QString caption, TColumnType type, QSqlRelation link, int index =0);
 		Column(QString name, QString caption, TColumnType type, QList<QString> avelebleValues);
-		Column(QString name, QString caption, TColumnType type, int index = 0);
+
+		Column(QString name="", QString caption="", TColumnType type=TCOLUMN_TYPE_NONE, int index = 0);
 
 		//Column(const Column &a)
 

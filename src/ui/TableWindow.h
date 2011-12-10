@@ -5,7 +5,8 @@
 
 #include <QtSql>
 #include <QSqlRelation>
-
+#include <QPair>
+#include <QList>
 #include "core/db_struct.h"
 
 namespace Ui {
@@ -17,11 +18,16 @@ class TableWindow : public QDialog
 	Q_OBJECT
 
 public:
+	typedef QPair<QString, QString> TLinkValues; // typedef используеться когна необходимо использовать вместе как само значение так и её ключ
+
+public:
 	explicit TableWindow(Table table, QSqlDatabase *db, QWidget *parent = 0);
 
 	void view();
 
 	Table table() const { return mTable;}
+
+	QList <TLinkValues> getLinkValues(QString columnName) const;
 
 	~TableWindow();
 

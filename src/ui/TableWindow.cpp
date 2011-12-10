@@ -36,6 +36,27 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 	ui->tableView->show();
 }
 
+QList <TableWindow::TLinkValues> TableWindow::getLinkValues(QString columnName) const
+{
+	QSqlQuery query( QString("Select %1, %2 from %3")
+					.arg(mTable.colums()[columnName].link().displayColumn())
+					.arg(mTable.colums()[columnName].link().indexColumn())
+					.arg(mTable.colums()[columnName].link().tableName())
+				, model.database());
+	query.exec();
+
+	QSqlRecord rec = query.record();
+
+	QList <TableWindow::TLinkValues> list;
+
+	while(query.next())
+	{
+		list << TableWindow::TLinkValues(query.value(0).toString(), query.value(1).toString());
+	}
+
+	return list;
+}
+
 TableWindow::~TableWindow()
 {
 	delete ui;
