@@ -67,7 +67,7 @@ const Table getDeveloper()
 		auto isAdmin = Table::Column("isAdmin" ,"isAdmin", Table::Column::TCOLUMN_TYPE_BOOL);
 		auto company = Table::Column("company","company",
 						Table::Column::TCOLUMN_TYPE_INT,
-						Table::Column::ForeingLink("company", "id"));
+						QSqlRelation("Company", "id", "name"), 4);
 
 
 		Table::TColumns colums;

@@ -5,22 +5,14 @@
 #include <QList>
 #include <QMap>
 
+#include <QSqlRelation>
+
 class Table
 {
 public:
 	class Column
 	{
 	public:
-		struct ForeingLink
-		{
-			QString tableName; //подумать могет лучше сделать ссылку именно на саму таблицу
-			QString columnName;
-
-			ForeingLink(QString iTableName="", QString iColumnName="")
-				:tableName(iTableName), columnName(iColumnName){}
-
-		};
-
 		enum TColumnType
 		{
 			TCOLUMN_TYPE_INT,
@@ -30,9 +22,9 @@ public:
 		};
 
 	public:
-		Column(QString name, QString caption, TColumnType type, ForeingLink llink);
+		Column(QString name, QString caption, TColumnType type, QSqlRelation link, int index =0);
 		Column(QString name, QString caption, TColumnType type, QList<QString> avelebleValues);
-		Column(QString name, QString caption, TColumnType type);
+		Column(QString name, QString caption, TColumnType type, int index = 0);
 
 		//Column(const Column &a)
 
@@ -40,16 +32,18 @@ public:
 		QString caption() const { return mCaption;}
 		TColumnType columnType() const { return mColumnType; }
 		bool isForeingKey() const { return mIsForeingKey;}
-		const ForeingLink &link() const {return mLink;}
+		const QSqlRelation &link() const {return mLink;}
 		const QList<QString> avelebleValues()  const { return mAvelebleValues; }
 
+		int index() const {return mIndex;}
 	private:
 		QString mName;
 		QString mCaption;
 		TColumnType mColumnType;
 		bool mIsForeingKey;
-		ForeingLink mLink;
+		QSqlRelation mLink;
 		QList<QString> mAvelebleValues; //для полей котрые могут принимать заранее определенный набор ззначений, допустим у пользователя админ или не админ
+		int mIndex;
 };
 
 public:
