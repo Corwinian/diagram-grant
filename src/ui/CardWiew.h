@@ -15,16 +15,19 @@ class CardView : public QDialog
     Q_OBJECT
 
 public:
-	explicit CardView(Table table, QWidget *parent = 0);
+	explicit CardView(Table table, const QSqlDatabase &db, QWidget *parent = 0);
 
 	~CardView();
 
 private:
+	QWidget *createSimpleItem(Table::Column::TColumnType type);
+
+	QWidget *createForeingLinkItem(Table::Column column);
+
+
     Ui::CardView *ui;
 
-	QSqlRelationalTableModel model;
-
-	int selectRow;
+	QSqlRelationalTableModel mModel;
 
 	Table mTable;
 
