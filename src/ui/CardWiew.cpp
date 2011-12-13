@@ -1,14 +1,15 @@
 #include "CardWiew.h"
 #include "ui_CardWiew.h"
 
-CardView::CardView(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::CardView)
+CardView::CardView(Table table, QWidget *parent = 0) :
+	QDialog(parent),
+	ui(new Ui::CardView),
+	mTable(table)
 {
-    ui->setupUi(this);
+	 ui->setupUi(this);
 }
 
 CardView::~CardView()
 {
-    delete ui;
+	delete ui;
 }
