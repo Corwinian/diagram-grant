@@ -32,7 +32,7 @@ void FilterWidget::on_cbColumns_currentIndexChanged(int index)
 {
 	mFilParam.column = ui->cbColumns->itemData(index).toString();
 
-	if (mColumns.find(mFilParam.column)->isForeingKey() && mFilParam.column != QString("id"))
+	if (mColumns[index].isForeingKey())
 	{
 		ui->cbValues->clear();
 

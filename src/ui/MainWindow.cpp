@@ -13,8 +13,11 @@ const Table getCompany()
 
 		Table::TColumns colums;
 
-		colums.insert(QString("Id"), id);
-		colums.insert(QString("name"), name);
+		//colums .insert(QString("Id"), id);
+		//colums.insert(QString("name"), name);
+
+		colums.append(id);
+		colums.append(name);
 
 		 return Table ("Company", "Company", colums);
 }
@@ -30,13 +33,14 @@ const Table getProjecty()
 		auto description = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
 
 		Table::TColumns colums;
-
+/*
 		colums.insert(QString("Id"), id);
 		colums.insert(QString("name"), name);
 		colums.insert(QString("name"), name);
 		colums.insert(QString("name"), name);
 		colums.insert(QString("name"), name);
 		colums.insert(QString("name"), name);
+		*/
 
 		/*
   CREATE  TABLE `Project` (
@@ -71,12 +75,20 @@ const Table getDeveloper()
 
 
 		Table::TColumns colums;
-
+/*
 		colums.insert(QString("login"), login);
 		colums.insert(QString("pass"), pass);
 		colums.insert(QString("name"), name);
 		colums.insert(QString("isAdmin"), isAdmin);
 		colums.insert(QString("company"), company);
+		*/
+
+		colums.append(login);
+		colums.append(pass);
+		colums.append(name);
+		colums.append(isAdmin);
+		colums.append(company);
+
 
 		return Table ("Developer", "Developer", colums);
 
@@ -107,12 +119,14 @@ const Table getContact()
 
 	Table::TColumns colums;
 
+	/*
 	colums.insert(QString("Id"), id);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
+	*/
 
 	return Table  ("Company", "Company", colums);
 
@@ -141,12 +155,13 @@ const Table getTask()
 
 	Table::TColumns colums;
 
-	colums.insert(QString("Id"), id);
+	/*colums.insert(QString("Id"), id);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
+	*/
 
 	return Table  ("Company", "Company", colums);
 }
@@ -179,12 +194,13 @@ CREATE  TABLE `WorkReport` (
 
 	Table::TColumns colums;
 
-	colums.insert(QString("Id"), id);
+	/*colums.insert(QString("Id"), id);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
+	*/
 
 	return Table  ("Company", "Company", colums);
 }
@@ -211,12 +227,13 @@ CREATE  TABLE `DistribDevelopers` (
 
 	Table::TColumns colums;
 
-	colums.insert(QString("Id"), id);
+	/*colums.insert(QString("Id"), id);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
+	*/
 
 	return Table  ("Company", "Company", colums);
 }
@@ -246,12 +263,13 @@ CREATE  TABLE `TaskList` (
 
 	Table::TColumns colums;
 
-	colums.insert(QString("Id"), id);
+	/*colums.insert(QString("Id"), id);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
 	colums.insert(QString("name"), name);
+	*/
 
 	return Table  ("Company", "Company", colums);
 }

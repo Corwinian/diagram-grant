@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QList>
+#include <QVector>
 #include <QMap>
 
 #include <QSqlRelation>
@@ -49,7 +50,8 @@ public:
 };
 
 public:
-	typedef QMap<QString, Column>  TColumns;
+	//typedef QMap<QString, Column>  TColumns;
+	typedef QVector<Column>  TColumns;
 
 	Table(QString name="", QString mCaption="", TColumns colums=TColumns());
 

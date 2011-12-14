@@ -38,14 +38,16 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 
 QList <TableWindow::TLinkValues> TableWindow::getLinkValues(QString columnName) const
 {
-	QSqlQuery query( QString("Select %1, %2 from %3")
-					.arg(mTable.colums()[columnName].link().displayColumn())
-					.arg(mTable.colums()[columnName].link().indexColumn())
-					.arg(mTable.colums()[columnName].link().tableName())
-				, model.database());
-	query.exec();
+  auto column = [mTable](QString name)  -> Table::Column {  for (auto i : mTable.colums())	if (i.name() == name) return i;	}(columnName);
 
-	QSqlRecord rec = query.record();
+
+	QSqlQuery query( QString("Select %1, %2 from %3")
+						.arg(column.link().displayColumn())
+						.arg(column.link().indexColumn())
+						.arg(column.link().tableName()),
+					 model.database());
+
+	query.exec();
 
 	QList <TableWindow::TLinkValues> list;
 
