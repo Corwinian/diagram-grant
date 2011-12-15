@@ -52,6 +52,8 @@ private slots:
 
 	void startFilter();
 
+	void on_btnAddRow_clicked();
+
 private:
 	Ui::TableWindow *ui;
 
