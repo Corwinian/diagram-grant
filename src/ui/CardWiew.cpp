@@ -5,6 +5,7 @@
 
 #include <QSqlQuery>
 #include <QDate>
+#include <QSqlRecord>
 
 #include "CardWiew.h"
 #include "ui_CardWiew.h"
@@ -33,14 +34,20 @@ ui(new Ui::CardView),
 mTable(table),
 mModel(model)
 {
-
- ui->setupUi(this);
-
- for (auto column : table.colums())
-{
-     ui->formLayout->addRow(column.caption(),  column.isForeingKey()  ?
-                                   createForeingLinkItem(column) : createSimpleItem(column.columnType())) ;
+    ui->setupUi(this);
+    loadItems();
 }
+
+void CardView::loadItems()
+{
+    for (auto column : mTable.colums())
+    {
+        QWidget* widget = column.isForeingKey() ? createForeingLinkItem(column) : createSimpleItem(column.columnType());
+
+        if(column.isAutoInc())
+            widget->setEnabled(false);
+        ui->formLayout->addRow(column.caption(), widget);
+    }
 }
 
 QWidget *CardView::createSimpleItem(Table::Column::TColumnType type)

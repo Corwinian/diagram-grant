@@ -2,14 +2,14 @@
 #include "core/db_struct.h"
 #include <QString>
 
-Table::Table::Column::Column(QString name, QString caption, TColumnType type, int index)
-	:mName(name), mCaption(caption), mColumnType(type), mIndex(index), mIsForeingKey(false)
+Table::Table::Column::Column(QString name, QString caption, TColumnType type, bool isAutoInc)
+	:mName(name), mCaption(caption), mColumnType(type), mIsAutoInc(isAutoInc), mIsForeingKey(false)
 {
 
 }
 
-Table::Column::Column(QString name, QString caption, TColumnType type, QSqlRelation link, int index)
-	:mName(name), mCaption(caption), mColumnType(type), mLink(link), mIndex(index), mIsForeingKey(true)
+Table::Column::Column(QString name, QString caption, TColumnType type, QSqlRelation link, bool isAutoInc)
+	:mName(name), mCaption(caption), mColumnType(type), mLink(link), mIsAutoInc(isAutoInc), mIsForeingKey(true)
 {
 }
 

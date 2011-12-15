@@ -23,10 +23,10 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
 
     model.setTable(mTable.name());
 
-    for (auto column : table.colums())
+    for (int i=0; i < table.colums().size(); ++i)
     {
-        if(column.isForeingKey())
-            model.setRelation(column.index(), column.link());
+        if(table.colums()[i].isForeingKey())
+            model.setRelation(i, table.colums()[i].link());
     }
 
     model.select();

@@ -18,11 +18,14 @@ public:
    // explicit CardView(Table table, const QSqlDatabase &db, QWidget *parent = 0);
 
      explicit CardView(Table table, QSqlRelationalTableModel &model, QWidget *parent = 0);
+
     ~CardView();
 private slots:
     void on_buttonBox_accepted();
 
 private:
+    void loadItems();
+
     QWidget *createSimpleItem(Table::Column::TColumnType type);
     QWidget *createForeingLinkItem(Table::Column column);
 

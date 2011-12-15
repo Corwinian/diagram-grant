@@ -8,7 +8,7 @@
 const Table getCompany()
 {
 
-		auto id = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT);
+		auto id = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT, true);
 		auto name = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
 
 		Table::TColumns colums;
