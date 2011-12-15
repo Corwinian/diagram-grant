@@ -38,8 +38,10 @@ CardView::CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord reco
 
     for (auto column : mTable.colums())
     {
+    #warning понять что значит цифра 2 (ну просто она в названии колонки есть а логичного объяснения не нашел)
         QWidget* widget = column.isForeingKey()
-                        ? createForeingLinkItem(column, record.value(column.name()))
+                        ? createForeingLinkItem(column, record.value(QString("%1_%2_2")
+                                    .arg(column.link().tableName()).arg(column.link().displayColumn())))
                         : createSimpleItem(column.columnType(), record.value(column.name()));
 
         if(column.isAutoInc())
@@ -77,6 +79,8 @@ QWidget *CardView::createForeingLinkItem(Table::Column column, QVariant value)
     while(query.next())
     {
         box->addItem(query.value(0).toString(), query.value(1).toString());
+        if (query.value(0).toString() ==  value.toString())
+            box->setCurrentIndex(box->count()-1);
     }
 
     return box;
