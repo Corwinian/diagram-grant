@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSqlRelationalTableModel>
+#include <QSqlRecord>
 
 #include "core/db_struct.h"
 
@@ -17,7 +18,7 @@ class CardView : public QDialog
 public:
    // explicit CardView(Table table, const QSqlDatabase &db, QWidget *parent = 0);
 
-   explicit CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record);
+   explicit CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record = QSqlRecord());
 
     ~CardView();
 private slots:

@@ -5,7 +5,7 @@
 
 #include <QSqlQuery>
 #include <QDate>
-#include <QSqlRecord>
+
 
 #include "CardWiew.h"
 #include "ui_CardWiew.h"
@@ -29,7 +29,7 @@ CardView::CardView(Table table, const QSqlDatabase &db, QWidget *parent) :
 }
 */
 
-CardView::CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record = QSqlRecord())
+CardView::CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record)
     :ui(new Ui::CardView),
     mTable(table),
     mModel(model)
