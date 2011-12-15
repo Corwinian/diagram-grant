@@ -26,7 +26,10 @@ TableWindow::TableWindow(Table table,QSqlDatabase *db, QWidget *parent) :
     for (int i=0; i < table.colums().size(); ++i)
     {
         if(table.colums()[i].isForeingKey())
+        {
             model.setRelation(i, table.colums()[i].link());
+
+        }
     }
 
     model.select();
@@ -131,5 +134,15 @@ void TableWindow::startFilter()
 void TableWindow::on_btnAddRow_clicked()
 {
     CardView * card = new CardView(table(), model);
+    card->show();
+}
+
+void TableWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    QSqlQuery q =model.query();
+
+    for (int i= q.first() -1;  i < index.row(); q.next(), ++i);
+
+    CardView * card = new CardView(table(), model, q.record());
     card->show();
 }

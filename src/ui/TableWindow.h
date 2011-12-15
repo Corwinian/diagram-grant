@@ -54,6 +54,8 @@ private slots:
 
 	void on_btnAddRow_clicked();
 
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
 private:
 	Ui::TableWindow *ui;
 
