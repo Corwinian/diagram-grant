@@ -1,63 +1,115 @@
 #include <QLabel>
 #include <QLineEdit>
+#include <QDateEdit>
 #include <QComboBox>
 
 #include <QSqlQuery>
+#include <QDate>
 
 #include "CardWiew.h"
 #include "ui_CardWiew.h"
 
 
-
+#include <QDebug>
+/*
 CardView::CardView(Table table, const QSqlDatabase &db, QWidget *parent) :
-	QDialog(parent),
-	ui(new Ui::CardView),
-	mTable(table),
-	mModel(this, db)
+    QDialog(parent),
+    ui(new Ui::CardView),
+    mTable(table),
+    mModel(this, db)
 {
-	 ui->setupUi(this);
+     ui->setupUi(this);
 
-	 for (auto column : table.colums())
-	{
-		 ui->formLayout->addRow(column.caption(),  column.isForeingKey()  ?
-									   createForeingLinkItem(column) : createSimpleItem(column.columnType())) ;
-	}
+     for (auto column : table.colums())
+    {
+         ui->formLayout->addRow(column.caption(),  column.isForeingKey()  ?
+                                       createForeingLinkItem(column) : createSimpleItem(column.columnType())) ;
+    }
+}
+*/
+CardView::CardView(Table table, QSqlRelationalTableModel &model, QWidget *parent):
+QDialog(parent),
+ui(new Ui::CardView),
+mTable(table),
+mModel(model)
+{
+
+ ui->setupUi(this);
+
+ for (auto column : table.colums())
+{
+     ui->formLayout->addRow(column.caption(),  column.isForeingKey()  ?
+                                   createForeingLinkItem(column) : createSimpleItem(column.columnType())) ;
+}
 }
 
 QWidget *CardView::createSimpleItem(Table::Column::TColumnType type)
 {
-	switch(type)
-	{
-		case Table::Column::TCOLUMN_TYPE_BOOL:
-		case Table::Column::TCOLUMN_TYPE_DATE:
-		case Table::Column::TCOLUMN_TYPE_INT:
-		case Table::Column::TCOLUMN_TYPE_STRING:
-			return new QLineEdit(this);
-	}
+    switch(type)
+    {
+        case Table::Column::TCOLUMN_TYPE_DATE:
+            return new QDateEdit(this);
+        case Table::Column::TCOLUMN_TYPE_BOOL:
+        case Table::Column::TCOLUMN_TYPE_INT:
+        case Table::Column::TCOLUMN_TYPE_STRING:
+            return new QLineEdit(this);
+    }
 }
 
 QWidget *CardView::createForeingLinkItem(Table::Column column)
 {
-	QComboBox *box = new QComboBox(this);
+    QComboBox *box = new QComboBox(this);
 
-	QSqlQuery query( QString("Select %1, %2 from %3")
-						.arg(column.link().displayColumn())
-						.arg(column.link().indexColumn())
-						.arg(column.link().tableName()),
-					 mModel.database());
+    QSqlQuery query( QString("Select %1, %2 from %3")
+                        .arg(column.link().displayColumn())
+                        .arg(column.link().indexColumn())
+                        .arg(column.link().tableName()),
+                     mModel.database());
 
-	query.exec();
+    query.exec();
 
-	while(query.next())
-	{
-		box->addItem(query.value(0).toString(), query.value(1).toString());
-	}
+    while(query.next())
+    {
+        box->addItem(query.value(0).toString(), query.value(1).toString());
+    }
 
-	return box;
+    return box;
 }
 
 
 CardView::~CardView()
 {
-	delete ui;
+    delete ui;
+}
+
+QVariant CardView::getValue(QWidget *widget, Table::Column column)
+{
+    if (column.isForeingKey())
+        return	static_cast <QComboBox *>(widget)->itemData(static_cast <QComboBox *>(widget)->currentIndex());
+
+    switch(column.columnType())
+    {
+        case Table::Column::TCOLUMN_TYPE_DATE:
+            return static_cast <QDateEdit *>(widget)->date();
+        case Table::Column::TCOLUMN_TYPE_BOOL:
+        case Table::Column::TCOLUMN_TYPE_INT:
+            return	static_cast <QLineEdit *>(widget)->text().toInt();
+        case Table::Column::TCOLUMN_TYPE_STRING:
+            return	static_cast <QLineEdit *>(widget)->text();
+    }
+}
+
+
+void CardView::on_buttonBox_accepted()
+{
+    int row = 0;
+    mModel.insertRows(row, 1);
+
+    for (int i =0; i < ui->formLayout->rowCount(); ++i)
+    {
+        mModel.setData(mModel.index(row, i),
+                       getValue(ui->formLayout->itemAt(i, QFormLayout::FieldRole)->widget(), mTable.colums()[i]));
+    }
+
+    mModel.submitAll() ? mModel.database().commit() : mModel.database().rollback();
 }
