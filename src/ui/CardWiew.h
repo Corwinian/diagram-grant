@@ -17,7 +17,7 @@ class CardView : public QDialog
 public:
    // explicit CardView(Table table, const QSqlDatabase &db, QWidget *parent = 0);
 
-     explicit CardView(Table table, QSqlRelationalTableModel &model, QWidget *parent = 0);
+   explicit CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record);
 
     ~CardView();
 private slots:
@@ -26,8 +26,8 @@ private slots:
 private:
     void loadItems();
 
-    QWidget *createSimpleItem(Table::Column::TColumnType type);
-    QWidget *createForeingLinkItem(Table::Column column);
+    QWidget *createSimpleItem(Table::Column::TColumnType type, QVariant value = QVariant());
+    QWidget *createForeingLinkItem(Table::Column column, QVariant value = QVariant());
 
     QVariant getValue(QWidget *widget, Table::Column column);
 

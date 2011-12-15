@@ -28,42 +28,41 @@ CardView::CardView(Table table, const QSqlDatabase &db, QWidget *parent) :
     }
 }
 */
-CardView::CardView(Table table, QSqlRelationalTableModel &model, QWidget *parent):
-QDialog(parent),
-ui(new Ui::CardView),
-mTable(table),
-mModel(model)
+
+CardView::CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record = QSqlRecord())
+    :ui(new Ui::CardView),
+    mTable(table),
+    mModel(model)
 {
     ui->setupUi(this);
-    loadItems();
-}
 
-void CardView::loadItems()
-{
     for (auto column : mTable.colums())
     {
-        QWidget* widget = column.isForeingKey() ? createForeingLinkItem(column) : createSimpleItem(column.columnType());
+        QWidget* widget = column.isForeingKey()
+                        ? createForeingLinkItem(column, record.value(column.name()))
+                        : createSimpleItem(column.columnType(), record.value(column.name()));
 
         if(column.isAutoInc())
             widget->setEnabled(false);
+
         ui->formLayout->addRow(column.caption(), widget);
     }
 }
 
-QWidget *CardView::createSimpleItem(Table::Column::TColumnType type)
+QWidget *CardView::createSimpleItem(Table::Column::TColumnType type, QVariant value)
 {
     switch(type)
     {
         case Table::Column::TCOLUMN_TYPE_DATE:
-            return new QDateEdit(this);
+            return new QDateEdit(value.toDate(), this);
         case Table::Column::TCOLUMN_TYPE_BOOL:
         case Table::Column::TCOLUMN_TYPE_INT:
         case Table::Column::TCOLUMN_TYPE_STRING:
-            return new QLineEdit(this);
+            return new QLineEdit(value.toString(), this);
     }
 }
 
-QWidget *CardView::createForeingLinkItem(Table::Column column)
+QWidget *CardView::createForeingLinkItem(Table::Column column, QVariant value)
 {
     QComboBox *box = new QComboBox(this);
 
