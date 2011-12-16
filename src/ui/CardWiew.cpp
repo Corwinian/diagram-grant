@@ -5,7 +5,7 @@
 
 #include <QSqlQuery>
 #include <QDate>
-
+#include <QSqlError>
 
 #include "CardWiew.h"
 #include "ui_CardWiew.h"
@@ -29,20 +29,24 @@ CardView::CardView(Table table, const QSqlDatabase &db, QWidget *parent) :
 }
 */
 
-CardView::CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record)
+CardView::CardView(Table table, QSqlRelationalTableModel &model, int row)
     :ui(new Ui::CardView),
     mTable(table),
-    mModel(model)
+    mModel(model),
+    mRow(row),
+    isInsert(row == -1)
 {
     ui->setupUi(this);
 
-    for (auto column : mTable.colums())
+
+
+    for (int i=0; i < mTable.colums().size(); ++i)
     {
-    #warning понять что значит цифра 2 (ну просто она в названии колонки есть а логичного объяснения не нашел)
+        auto column = mTable.colums()[i];
+
         QWidget* widget = column.isForeingKey()
-                        ? createForeingLinkItem(column, record.value(QString("%1_%2_2")
-                                    .arg(column.link().tableName()).arg(column.link().displayColumn())))
-                        : createSimpleItem(column.columnType(), record.value(column.name()));
+                        ? createForeingLinkItem(column, mModel.data(mModel.index(row, i)))
+                        : createSimpleItem(column.columnType(), mModel.data(mModel.index(row, i)));
 
         if(column.isAutoInc())
             widget->setEnabled(false);
@@ -109,17 +113,19 @@ QVariant CardView::getValue(QWidget *widget, Table::Column column)
     }
 }
 
-
 void CardView::on_buttonBox_accepted()
 {
-    int row = 0;
-    mModel.insertRows(row, 1);
+    if(isInsert)
+          mModel.insertRows(0, 1);
 
-    for (int i =0; i < ui->formLayout->rowCount(); ++i)
-    {
-        mModel.setData(mModel.index(row, i),
+   for (int i =0; i < ui->formLayout->rowCount(); ++i)
+   {
+        auto column = mTable.colums()[i];
+
+        mModel.setData(mModel.index(0, i),
                        getValue(ui->formLayout->itemAt(i, QFormLayout::FieldRole)->widget(), mTable.colums()[i]));
-    }
+   }
 
-    mModel.submitAll() ? mModel.database().commit() : mModel.database().rollback();
+
+   mModel.submitAll() ? mModel.database().commit() : mModel.database().rollback();
 }

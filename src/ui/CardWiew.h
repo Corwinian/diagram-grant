@@ -18,7 +18,7 @@ class CardView : public QDialog
 public:
    // explicit CardView(Table table, const QSqlDatabase &db, QWidget *parent = 0);
 
-   explicit CardView(Table table, QSqlRelationalTableModel &model, QSqlRecord record = QSqlRecord());
+   explicit CardView(Table table, QSqlRelationalTableModel &model, int row =-1);
 
     ~CardView();
 private slots:
@@ -38,6 +38,8 @@ private:
 
     Table mTable;
 
+    int mRow;
+    bool isInsert;
 };
 
 #endif // CARDWIEW_H
