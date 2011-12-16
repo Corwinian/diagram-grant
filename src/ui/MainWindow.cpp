@@ -8,7 +8,7 @@
 const Table getCompany()
 {
 
-		auto id = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT, true);
+		auto id = Table::Column("id","id", Table::Column::TCOLUMN_TYPE_INT, true, true);
 		auto name = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
 
 		Table::TColumns colums;
@@ -64,7 +64,7 @@ const Table getProjecty()
 
 const Table getDeveloper()
 {
-		auto login = Table::Column("login","login", Table::Column::TCOLUMN_TYPE_STRING);
+		auto login = Table::Column("login","login", Table::Column::TCOLUMN_TYPE_STRING, true);
 		auto pass = Table::Column("pass","pass", Table::Column::TCOLUMN_TYPE_STRING);
 		auto name = Table::Column("name","name", Table::Column::TCOLUMN_TYPE_STRING);
 
